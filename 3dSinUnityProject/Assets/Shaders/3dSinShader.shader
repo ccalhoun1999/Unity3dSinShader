@@ -1,72 +1,76 @@
-Shader "Unlit/3dSinShader"
+Shader "Custom/3dSinShader"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
-        _AnimSpeedX("Anim Speed (X)", Range(0,5)) = 1
-        _AnimSpeedY("Anim Speed (Y)", Range(0,5)) = 1
-        _AnimScale("Anim Scale", Range(0,5)) = 1
-        _AnimTiling("Anim Tiling", Range(0,100)) = 1
+        _Color ("Color", Color) = (1,1,1,1)
+        _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        _Glossiness ("Smoothness", Range(0,1)) = 0.5
+        _Metallic ("Metallic", Range(0,1)) = 0.0
+        _AnimSpeed("Anim Speed", Range(0,10)) = 1
+        _Amplitude("Amplitude", Range(0,15)) = 1
+        _Frequency("Frequency", Range(0,2)) = 1
     }
     SubShader
     {
         Tags { "RenderType"="Opaque" }
-        LOD 100
+        LOD 200
 
-        Pass
+        CGPROGRAM
+        // Physically based Standard lighting model, and enable shadows on all light types
+        #pragma surface surf Standard addshadow vertex:vert
+
+        // Use shader model 3.0 target, to get nicer looking lighting
+        #pragma target 3.0
+
+        sampler2D _MainTex;
+
+        /* struct appdata
         {
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            // make fog work
-            #pragma multi_compile_fog
+            float4 vertex : POSITION;
+            float2 uv : TEXCOORD0;
+        };
 
-            #include "UnityCG.cginc"
+        struct v2f
+        {
+            float2 uv : TEXCOORD0;
+            float4 vertex : SV_POSITION;
+        }; */
 
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
-            };
+        struct Input
+        {
+            float2 uv_MainTex;
+        };
 
-            struct v2f
-            {
-                float2 uv : TEXCOORD0;
-                UNITY_FOG_COORDS(1)
-                float4 vertex : SV_POSITION;
-            };
+        half _Glossiness;
+        half _Metallic;
+        fixed4 _Color;
+        float _AnimSpeed;
+        float _Frequency;
+        float _Amplitude;
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
-            float _AnimSpeedX;
-            float _AnimSpeedY;
-            float _AnimScale;
-            fixed _AnimTiling;
+        // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
+        // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
+        // #pragma instancing_options assumeuniformscaling
+        UNITY_INSTANCING_BUFFER_START(Props)
+            // put more per-instance properties here
+        UNITY_INSTANCING_BUFFER_END(Props)
 
-            v2f vert (appdata v)
-            {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-
-                o.vertex.x += sin((o.vertex.x + o.vertex.y) * _AnimTiling + _Time.y * _AnimSpeedY) * _AnimScale;
-                o.vertex.y += cos((o.vertex.y - o.vertex.x) * _AnimTiling + _Time.y * _AnimSpeedY) * _AnimScale;
-
-
-
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                UNITY_TRANSFER_FOG(o,o.vertex);
-                return o;
-            }
-
-            fixed4 frag (v2f i) : SV_Target
-            {
-                // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
-                // apply fog
-                UNITY_APPLY_FOG(i.fogCoord, col);
-                return col;
-            }
-            ENDCG
+        void vert (inout appdata_full v)
+        {
+            v.vertex.y = _Amplitude * sin(_Frequency * sqrt(v.vertex.x*v.vertex.x + v.vertex.z*v.vertex.z) + _Time.y * _AnimSpeed);
         }
+
+        void surf (Input IN, inout SurfaceOutputStandard o)
+        {
+            // Albedo comes from a texture tinted by color
+            fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+            o.Albedo = c.rgb;
+            // Metallic and smoothness come from slider variables
+            o.Metallic = _Metallic;
+            o.Smoothness = _Glossiness;
+            o.Alpha = c.a;
+        }
+        ENDCG
     }
+    FallBack "Diffuse"
 }

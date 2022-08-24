@@ -5,7 +5,6 @@ using UniRx;
 
 public class FPSPlayer : MonoBehaviour
 {
-
     void Start()
     {
         
