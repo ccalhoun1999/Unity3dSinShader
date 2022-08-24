@@ -24,18 +24,6 @@ Shader "Custom/3dSinShader"
 
         sampler2D _MainTex;
 
-        /* struct appdata
-        {
-            float4 vertex : POSITION;
-            float2 uv : TEXCOORD0;
-        };
-
-        struct v2f
-        {
-            float2 uv : TEXCOORD0;
-            float4 vertex : SV_POSITION;
-        }; */
-
         struct Input
         {
             float2 uv_MainTex;
