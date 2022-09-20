@@ -14,7 +14,7 @@ public class MouseLook : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = 10000;
+        Application.targetFrameRate = -1;
         Vector3 rot = transform.localRotation.eulerAngles;
         rotY = rot.y;
         rotX = rot.x;
