@@ -9,8 +9,8 @@ public class MouseLook : MonoBehaviour
     [SerializeField]
     private float clampAngle = 80.0f;
 
-    private float rotY = 0.0f; // rotation around the up/y axis
-    private float rotX = 0.0f; // rotation around the right/x axis
+    private float rotY = 0.0f;
+    private float rotX = 0.0f;
 
     private void Start()
     {
