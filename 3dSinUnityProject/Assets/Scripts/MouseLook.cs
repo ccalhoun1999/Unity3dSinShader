@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public float mouseSensitivity = 100.0f;
-    public float clampAngle = 80.0f;
+    [SerializeField][Range(0f, 1f)]
+    private float mouseSensitivity = 0.1f;
+    [SerializeField]
+    private float clampAngle = 80.0f;
 
     private float rotY = 0.0f; // rotation around the up/y axis
     private float rotX = 0.0f; // rotation around the right/x axis
 
-    void Start()
+    private void Start()
     {
+        Application.targetFrameRate = 10000;
         Vector3 rot = transform.localRotation.eulerAngles;
         rotY = rot.y;
         rotX = rot.x;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void Update()
+    private void Update()
     {
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = -Input.GetAxis("Mouse Y");
 
-        rotY += mouseX * mouseSensitivity * Time.deltaTime;
-        rotX += mouseY * mouseSensitivity * Time.deltaTime;
+        rotY += mouseX * mouseSensitivity;
+        rotX += mouseY * mouseSensitivity;
 
         rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
 
