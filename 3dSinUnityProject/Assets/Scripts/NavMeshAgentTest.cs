@@ -23,7 +23,14 @@ public class NavMeshAgentTest : MonoBehaviour
         while (true)
         {
             yield return waiter;
-            navMeshAgent.destination = player.transform.position;
+            if (Vector3.Distance(transform.position, player.transform.position) > 5f)
+            {
+                navMeshAgent.destination = player.transform.position;
+            }
+            else
+            {
+                navMeshAgent.destination = transform.position;
+            }
         }
     }
 

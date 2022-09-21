@@ -374,7 +374,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379514919}
-  m_Material: {fileID: 13400000, guid: c4505832a7dd895488d91e60868bf512, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -732,9 +732,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6864644183242320893, guid: 3b2e479435a435a4d919b72f6f3a4887, type: 3}
-      propertyPath: speed
-      value: 10
+    - target: {fileID: 3702026279009510403, guid: 3b2e479435a435a4d919b72f6f3a4887, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7649491600472867281, guid: 3b2e479435a435a4d919b72f6f3a4887, type: 3}
       propertyPath: m_Enabled
