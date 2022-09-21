@@ -9,9 +9,9 @@ public class Drag : MonoBehaviour
     [SerializeField]
     private float drag;
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-        var dragForce = -drag * (body.velocity * body.velocity.magnitude) / 2 * Time.deltaTime;
+        var dragForce = -drag * (body.velocity * body.velocity.magnitude) / 2 * Time.fixedDeltaTime;
         dragForce.y = 0f;
         body.AddForce(dragForce, ForceMode.VelocityChange);
     }
