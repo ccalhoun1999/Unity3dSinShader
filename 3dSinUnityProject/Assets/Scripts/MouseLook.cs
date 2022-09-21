@@ -56,13 +56,15 @@ public class MouseLook : MonoBehaviour
     {
         RaycastHit hitInfo;
 
+        Vector3 hitScanOrigin = gameObject.transform.position;
+        hitScanOrigin.y -= 0.05f;
+        hitScanOrigin.x += 0.05f;
+        
 #if UNITY_EDITOR
-        Vector3 debugRayOrigin = gameObject.transform.position;
-        debugRayOrigin.y -= 0.5f;
-        Debug.DrawRay(debugRayOrigin, gameObject.transform.forward * 20, Color.white, 0.5f);
+        Debug.DrawRay(hitScanOrigin, gameObject.transform.forward * 20, Color.white, 0.5f);
 #endif
 
-        if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward * 20, out hitInfo))
+        if (Physics.Raycast(hitScanOrigin, gameObject.transform.forward * 20, out hitInfo))
         {
             if (hitInfo.collider.CompareTag("Enemy"))
             {
