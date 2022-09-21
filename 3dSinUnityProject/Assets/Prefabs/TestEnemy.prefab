@@ -49,6 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 1767902785762832251}
+  idleBorder: 20
+  huntingBorder: 10
+  attackingBorder: 5
 --- !u!33 &1767902785762832252
 MeshFilter:
   m_ObjectHideFlags: 0

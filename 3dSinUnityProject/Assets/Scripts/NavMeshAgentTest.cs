@@ -8,13 +8,99 @@ public class NavMeshAgentTest : MonoBehaviour
     [SerializeField]
     private NavMeshAgent navMeshAgent = null;
 
+    [SerializeField]
+    private float idleBorder;
+    [SerializeField]
+    private float huntingBorder;
+    [SerializeField]
+    private float attackingBorder;
+
+
     GameObject player = null;
 
-    void Start()
+    private enum aiState
+    {
+        idle = 0,
+        hunting = 1,
+        attacking = 2,
+        chasing = 3
+    }
+
+    private aiState _state;
+    private aiState state
+    {
+        get
+        {
+            return _state;
+        }
+        set
+        {
+            if (_state != value)
+            {
+                _state = value;
+                TriggerNewState(_state);
+            }
+        }
+    }
+
+    private void Start()
     {
         player = GameObject.Find("Player");
-        StartCoroutine(GoToPlayer());
-        StartCoroutine(AttackPlayer());
+    }
+
+    private void Update()
+    {
+        BehaviourTree();
+    }
+
+    private void BehaviourTree()
+    {
+        float distanceFromPlayer = 
+            Vector3.Distance(transform.position, player.transform.position);
+
+        if (distanceFromPlayer > idleBorder)
+        {
+            state = aiState.idle;
+            Debug.Log("idle");
+        }
+        else if (distanceFromPlayer > huntingBorder)
+        {
+            state = aiState.hunting;
+            Debug.Log("hunting");
+        }
+        else if (distanceFromPlayer > attackingBorder)
+        {
+            state = aiState.attacking;
+            Debug.Log("attacking");
+        }
+        else
+        {
+            state = aiState.chasing;
+            Debug.Log("chasing");
+        }
+        Debug.Log("State: " + state);
+    }
+
+    private void TriggerNewState(aiState state)
+    {
+        if (state == aiState.idle)
+        {
+        }
+        else if (state == aiState.hunting)
+        {
+            StopAllCoroutines();
+            StartCoroutine(GoToPlayer());
+        }
+        else if (state == aiState.attacking)
+        {
+            StopAllCoroutines();
+            StartCoroutine(ShootPlayer());
+        }
+        else if (state == aiState.chasing)
+        {
+            StopAllCoroutines();
+            StartCoroutine(GoToPlayer());
+        }
     }
 
     private IEnumerator GoToPlayer()
@@ -23,18 +109,11 @@ public class NavMeshAgentTest : MonoBehaviour
         while (true)
         {
             yield return waiter;
-            if (Vector3.Distance(transform.position, player.transform.position) > 5f)
-            {
                 navMeshAgent.destination = player.transform.position;
-            }
-            else
-            {
-                navMeshAgent.destination = transform.position;
-            }
         }
     }
 
-    private IEnumerator AttackPlayer()
+    private IEnumerator ShootPlayer()
     {
         WaitForSeconds wait1 = new WaitForSeconds(Random.Range(0.05f, 0.4f));
         WaitForSeconds wait2 = new WaitForSeconds(Random.Range(0.15f, 0.6f));
