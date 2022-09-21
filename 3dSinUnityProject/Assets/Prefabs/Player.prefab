@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 3702026279009510403}
   cam: {fileID: 2230065688671665683}
-  speed: 6
+  speed: 10
   jumpStrength: 5
 --- !u!33 &7810606767250340143
 MeshFilter:

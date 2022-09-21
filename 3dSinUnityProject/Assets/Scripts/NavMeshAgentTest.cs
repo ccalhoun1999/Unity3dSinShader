@@ -29,16 +29,20 @@ public class NavMeshAgentTest : MonoBehaviour
 
     private IEnumerator AttackPlayer()
     {
-        WaitForSeconds waiter = new WaitForSeconds(0.3f);
+        WaitForSeconds wait1 = new WaitForSeconds(Random.Range(0.05f, 0.4f));
+        WaitForSeconds wait2 = new WaitForSeconds(Random.Range(0.15f, 0.6f));
         while (true)
         {
-            yield return waiter;
+            yield return wait1;
             
             RaycastHit hitInfo = new RaycastHit();
+            Vector3 target = (player.transform.position - transform.position) * 20;
+
+            yield return wait2;
 #if UNITY_EDITOR
-            Debug.DrawRay(transform.position, (player.transform.position - transform.position) * 20, Color.red, 0.1f);
+            Debug.DrawRay(transform.position, target, Color.red, 0.1f);
 #endif
-            Physics.Raycast(transform.position, (player.transform.position - transform.position) * 20, out hitInfo);
+            Physics.Raycast(transform.position, target, out hitInfo);
             if (hitInfo.collider != null)
             {
                 if (hitInfo.collider.CompareTag("Player"))
