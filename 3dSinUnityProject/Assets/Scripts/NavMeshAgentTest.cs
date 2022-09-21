@@ -15,7 +15,7 @@ public class NavMeshAgentTest : MonoBehaviour
 
     private IEnumerator GoToPlayer()
     {
-        WaitForSeconds waiter = new WaitForSeconds(0.5f);
+        WaitForSeconds waiter = new WaitForSeconds(0.1f);
         while (true)
         {
             yield return waiter;
