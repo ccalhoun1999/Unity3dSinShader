@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 public class MouseLook : MonoBehaviour
 {
@@ -19,6 +20,28 @@ public class MouseLook : MonoBehaviour
         rotY = rot.y;
         rotX = rot.x;
         Cursor.lockState = CursorLockMode.Locked;
+        
+        #if UNITY_EDITOR
+        KeyCode pauseKey = KeyCode.P;
+        #else
+        KeyCode pauseKey = KeyCode.Escape;
+        #endif
+
+        Observable.EveryUpdate()
+            .Where(_ => Input.GetKeyDown(pauseKey))
+            .Subscribe(_ => {
+                if (Time.timeScale != 1)
+                {
+                    Time.timeScale = 1;
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
+                else
+                {
+                    Time.timeScale = 0f;
+                    Cursor.lockState = CursorLockMode.None;
+                }
+            })
+            .AddTo(this);
     }
 
     private void Update()
@@ -26,8 +49,8 @@ public class MouseLook : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = -Input.GetAxis("Mouse Y");
 
-        rotY += mouseX * mouseSensitivity;
-        rotX += mouseY * mouseSensitivity;
+        rotY += mouseX * mouseSensitivity * Time.timeScale;
+        rotX += mouseY * mouseSensitivity * Time.timeScale;
 
         rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
 
