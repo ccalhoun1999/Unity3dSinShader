@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UniRx;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MouseLook : MonoBehaviour
 {
-    [SerializeField][Range(0f, 1f)]
+    [SerializeField]
+    [Range(0f, 1f)]
     private float mouseSensitivity = 0.1f;
     [SerializeField]
     private float clampAngle = 80.0f;
@@ -20,16 +22,17 @@ public class MouseLook : MonoBehaviour
         rotY = rot.y;
         rotX = rot.x;
         Cursor.lockState = CursorLockMode.Locked;
-        
-        #if UNITY_EDITOR
+
+#if UNITY_EDITOR
         KeyCode pauseKey = KeyCode.P;
-        #else
+#else
         KeyCode pauseKey = KeyCode.Escape;
-        #endif
+#endif
 
         Observable.EveryUpdate()
             .Where(_ => Input.GetKeyDown(pauseKey))
-            .Subscribe(_ => {
+            .Subscribe(_ =>
+            {
                 if (Time.timeScale != 1)
                 {
                     Time.timeScale = 1;
@@ -42,6 +45,30 @@ public class MouseLook : MonoBehaviour
                 }
             })
             .AddTo(this);
+
+        Observable.EveryUpdate()
+            .Where(_ => Input.GetKeyDown(KeyCode.Mouse0))
+            .Subscribe(_ => HitScan())
+            .AddTo(this);
+    }
+
+    private void HitScan()
+    {
+        RaycastHit hitInfo;
+
+#if UNITY_EDITOR
+        Vector3 debugRayOrigin = gameObject.transform.position;
+        debugRayOrigin.y -= 0.5f;
+        Debug.DrawRay(debugRayOrigin, gameObject.transform.forward * 20, Color.white, 5f);
+#endif
+
+        if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward * 20, out hitInfo))
+        {
+            if (hitInfo.collider.CompareTag("Enemy"))
+            {
+                Destroy(hitInfo.transform.gameObject);
+            }
+        }
     }
 
     private void Update()
