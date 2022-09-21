@@ -59,7 +59,7 @@ public class MouseLook : MonoBehaviour
 #if UNITY_EDITOR
         Vector3 debugRayOrigin = gameObject.transform.position;
         debugRayOrigin.y -= 0.5f;
-        Debug.DrawRay(debugRayOrigin, gameObject.transform.forward * 20, Color.white, 5f);
+        Debug.DrawRay(debugRayOrigin, gameObject.transform.forward * 20, Color.white, 0.5f);
 #endif
 
         if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward * 20, out hitInfo))
