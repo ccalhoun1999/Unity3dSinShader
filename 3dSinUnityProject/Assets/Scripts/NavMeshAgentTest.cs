@@ -61,24 +61,19 @@ public class NavMeshAgentTest : MonoBehaviour
         if (distanceFromPlayer > idleBorder)
         {
             state = aiState.idle;
-            Debug.Log("idle");
         }
         else if (distanceFromPlayer > huntingBorder)
         {
             state = aiState.hunting;
-            Debug.Log("hunting");
         }
         else if (distanceFromPlayer > attackingBorder)
         {
             state = aiState.attacking;
-            Debug.Log("attacking");
         }
         else
         {
             state = aiState.chasing;
-            Debug.Log("chasing");
         }
-        Debug.Log("State: " + state);
     }
 
     private void TriggerNewState(aiState state)
@@ -115,16 +110,16 @@ public class NavMeshAgentTest : MonoBehaviour
 
     private IEnumerator ShootPlayer()
     {
-        WaitForSeconds wait1 = new WaitForSeconds(Random.Range(0.05f, 0.4f));
-        WaitForSeconds wait2 = new WaitForSeconds(Random.Range(0.15f, 0.6f));
+        WaitForSeconds attackDelay = new WaitForSeconds(Random.Range(0.05f, 0.4f));
+        WaitForSeconds aimDelay = new WaitForSeconds(Random.Range(0.1f, 0.25f));
         while (true)
         {
-            yield return wait1;
+            yield return attackDelay;
             
             RaycastHit hitInfo = new RaycastHit();
             Vector3 target = (player.transform.position - transform.position) * 20;
 
-            yield return wait2;
+            yield return aimDelay;
 #if UNITY_EDITOR
             Debug.DrawRay(transform.position, target, Color.red, 0.1f);
 #endif
@@ -133,7 +128,7 @@ public class NavMeshAgentTest : MonoBehaviour
             {
                 if (hitInfo.collider.CompareTag("Player"))
                 {
-                    Debug.Log("Hit player");
+                    player.GetComponent<FPSPlayer>().TakeDamage(10);
                 }
             }
         }
