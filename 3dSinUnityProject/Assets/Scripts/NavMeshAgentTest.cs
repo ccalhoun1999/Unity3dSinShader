@@ -128,7 +128,7 @@ public class NavMeshAgentTest : MonoBehaviour
             {
                 if (hitInfo.collider.CompareTag("Player"))
                 {
-                    player.GetComponent<FPSPlayer>().TakeDamage(10);
+                    hitInfo.collider.GetComponent<FPSPlayer>().TakeDamage(10);
                 }
             }
         }
