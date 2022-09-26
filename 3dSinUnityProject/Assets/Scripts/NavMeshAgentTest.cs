@@ -120,9 +120,7 @@ public class NavMeshAgentTest : MonoBehaviour
             Vector3 target = (player.transform.position - transform.position) * 20;
 
             yield return aimDelay;
-#if UNITY_EDITOR
             Debug.DrawRay(transform.position, target, Color.red, 0.1f);
-#endif
             Physics.Raycast(transform.position, target, out hitInfo);
             if (hitInfo.collider != null)
             {
