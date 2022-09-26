@@ -74,6 +74,10 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 GetNewVelVec(Vector3 vec, float mag)
     {
+        if (mag == 0)
+        {
+            vec = new Vector3(0, vec.y, 0);
+        }
         vec = new Vector3(vec.x / mag * speed, vec.y, vec.z / mag * speed);
         return vec;
     }
