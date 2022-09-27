@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         Grapple,
     }
 
-    MovementMode movementMode = MovementMode.Ground;
+    //MovementMode movementMode = MovementMode.Ground;
 
     private void Start()
     {
@@ -34,18 +34,17 @@ public class PlayerMovement : MonoBehaviour
             .Where(_ => Input.GetKey(KeyCode.W))
             .Subscribe(_ => {
                 Vector3 direction = new Vector3(cam.transform.forward.x, 0f, cam.transform.forward.z);
-                Vector3.Normalize(direction);
+                direction = direction.normalized;
                 // body.velocity += direction * speed;
                 body.AddForce(direction * speed, ForceMode.Acceleration);
                 // body.velocity = GetNewVelVec(body.velocity, body.velocity.magnitude);
-
             }).AddTo(this);
 
         Observable.EveryUpdate()
             .Where(_ => Input.GetKey(KeyCode.S))
             .Subscribe(_ => {
                 Vector3 direction = new Vector3(cam.transform.forward.x, 0f, cam.transform.forward.z);
-                Vector3.Normalize(direction);
+                direction = direction.normalized;
                 // body.velocity -= direction * speed;
                 body.AddForce(-direction * speed, ForceMode.Acceleration);
                 // body.velocity = GetNewVelVec(body.velocity, body.velocity.magnitude);
@@ -56,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
             .Where(_ => Input.GetKey(KeyCode.A))
             .Subscribe(_ => {
                 Vector3 direction = new Vector3(cam.transform.right.x, 0f, cam.transform.right.z);
-                Vector3.Normalize(direction);
+                direction = direction.normalized;
                 // body.velocity -= direction * speed;
                 body.AddForce(-direction * speed, ForceMode.Acceleration);
                 // body.velocity = GetNewVelVec(body.velocity, body.velocity.magnitude);
@@ -67,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
             .Where(_ => Input.GetKey(KeyCode.D))
             .Subscribe(_ => {
                 Vector3 direction = new Vector3(cam.transform.right.x, 0f, cam.transform.right.z);
-                Vector3.Normalize(direction);
+                direction = direction.normalized;
                 // body.velocity += direction * speed;
                 body.AddForce(direction * speed, ForceMode.Acceleration);
                 // body.velocity = GetNewVelVec(body.velocity, body.velocity.magnitude);

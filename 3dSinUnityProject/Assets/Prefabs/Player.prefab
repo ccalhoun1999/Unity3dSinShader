@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6864644183242320893}
   - component: {fileID: 7810606767250340143}
   - component: {fileID: 1638473198133573299}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -81,6 +81,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 6649058729202237882}
   mouseLook: {fileID: 7462870548913938720}
+  grappleLayers:
+    serializedVersion: 2
+    m_Bits: 1
   _hp: 100
 --- !u!114 &6864644183242320893
 MonoBehaviour:
@@ -160,7 +163,7 @@ GameObject:
   - component: {fileID: 7462870548913938720}
   - component: {fileID: 2230065688671665683}
   - component: {fileID: 5671569577762867928}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +261,7 @@ GameObject:
   - component: {fileID: 6927897778518593497}
   - component: {fileID: 3073082679452828182}
   - component: {fileID: 315773438657700438}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8734889941927647193}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Arms
   m_TagString: Untagged
   m_Icon: {fileID: 0}

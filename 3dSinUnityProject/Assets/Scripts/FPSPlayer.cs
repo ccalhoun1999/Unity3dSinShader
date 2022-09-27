@@ -10,6 +10,8 @@ public class FPSPlayer : MonoBehaviour
     [SerializeField]
     private MouseLook mouseLook = null;
     [SerializeField]
+    private LayerMask grappleLayers;
+    [SerializeField]
     private float _hp;
     public float HealthPoints
     {
@@ -82,7 +84,7 @@ public class FPSPlayer : MonoBehaviour
         hitScanOrigin.y -= 0.05f;
         hitScanOrigin.x += 0.05f;
         
-        Physics.Raycast(hitScanOrigin, mouseLook.transform.forward * 20, out hitInfo);
+        Physics.Raycast(hitScanOrigin, mouseLook.transform.forward * 20, out hitInfo, 40f, grappleLayers);
 
         if(hitInfo.collider != null)
         {
@@ -102,7 +104,6 @@ public class FPSPlayer : MonoBehaviour
             Vector3 force = Vector3.Normalize(hitInfo.point - transform.position) * 10f;
             Vector3 scaledForce = new Vector3(force.x * 3f, force.y * 3f, force.z * 3f);
             body.AddForce(scaledForce);
-            Debug.Log(force);
             yield return UpdateRate;
         }
     }
