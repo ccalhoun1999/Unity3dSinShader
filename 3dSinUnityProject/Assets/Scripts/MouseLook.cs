@@ -10,7 +10,8 @@ public class MouseLook : MonoBehaviour
     [Range(0f, 1f)]
     private float mouseSensitivity = 0.1f;
     [SerializeField]
-    private float clampAngle = 80.0f;
+    [Range(0f, 90f)]
+    private float clampAngle = 85.0f;
 
     private float rotY = 0.0f;
     private float rotX = 0.0f;
@@ -45,32 +46,6 @@ public class MouseLook : MonoBehaviour
                 }
             })
             .AddTo(this);
-
-        Observable.EveryUpdate()
-            .Where(_ => Input.GetKeyDown(KeyCode.Mouse0))
-            .Subscribe(_ => HitScan())
-            .AddTo(this);
-    }
-
-    private void HitScan()
-    {
-        RaycastHit hitInfo;
-
-        Vector3 hitScanOrigin = gameObject.transform.position;
-        hitScanOrigin.y -= 0.05f;
-        hitScanOrigin.x += 0.05f;
-        
-#if UNITY_EDITOR
-        Debug.DrawRay(hitScanOrigin, gameObject.transform.forward * 20, Color.white, 0.5f);
-#endif
-
-        if (Physics.Raycast(hitScanOrigin, gameObject.transform.forward * 20, out hitInfo))
-        {
-            if (hitInfo.collider.CompareTag("Enemy"))
-            {
-                Destroy(hitInfo.transform.gameObject);
-            }
-        }
     }
 
     private void Update()
