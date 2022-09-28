@@ -8,11 +8,17 @@ public class FPSPlayer : MonoBehaviour
     [SerializeField]
     private Rigidbody body = null;
     [SerializeField]
+    private float maxRaycastDistance = 40f;
+    [SerializeField]
+    private LayerMask hitScanTargetLayers;
+    [SerializeField]
     private MouseLook mouseLook = null;
     [SerializeField]
     private LineRenderer grappleRenderer = null;
     [SerializeField]
     private PlayerMovement playerMovement = null;
+    [SerializeField]
+    private TrailRenderer bulletTrail = null;
     [SerializeField]
     private LayerMask grappleLayers;
     [SerializeField]
@@ -35,7 +41,7 @@ public class FPSPlayer : MonoBehaviour
     {
         Observable.EveryUpdate()
             .Where(_ => Input.GetKeyDown(KeyCode.Mouse0))
-            .Subscribe(_ => HitScan())
+            .Subscribe(_ => StandardAttack())
             .AddTo(this);
         Observable.EveryUpdate()
             .Where(_ => Input.GetKeyDown(KeyCode.Mouse1))
@@ -57,7 +63,7 @@ public class FPSPlayer : MonoBehaviour
         Debug.Log(HealthPoints);
     }
 
-    private void HitScan()
+    private void StandardAttack()
     {
         RaycastHit hitInfo;
 
@@ -65,10 +71,12 @@ public class FPSPlayer : MonoBehaviour
         hitScanOrigin.y -= 0.05f;
         hitScanOrigin.x += 0.05f;
         
-        Physics.Raycast(hitScanOrigin, mouseLook.transform.forward * 20, out hitInfo);
+        Physics.Raycast(hitScanOrigin, mouseLook.transform.forward, out hitInfo, maxRaycastDistance, hitScanTargetLayers);
+        TrailRenderer trail = Instantiate(bulletTrail, hitScanOrigin, Quaternion.identity);
+
         if(hitInfo.collider != null)
         {
-            Debug.DrawLine(hitScanOrigin, hitInfo.point, Color.white, 0.5f);
+            StartCoroutine(bulletTrailRoutine(trail, hitInfo.point, hitScanOrigin));
             if (hitInfo.collider.CompareTag("Enemy"))
             {
                 Destroy(hitInfo.transform.gameObject);
@@ -76,8 +84,26 @@ public class FPSPlayer : MonoBehaviour
         }
         else
         {
-            Debug.DrawRay(hitScanOrigin, mouseLook.transform.forward * 50f, Color.white, 0.5f);            
+            Vector3 target = mouseLook.transform.forward.normalized * maxRaycastDistance + hitScanOrigin;
+            StartCoroutine(bulletTrailRoutine(trail, target, hitScanOrigin));
         }
+    }
+
+    private IEnumerator bulletTrailRoutine(TrailRenderer trail, Vector3 endPoint, Vector3 startPoint)
+    {
+        Debug.Log(Vector3.Distance(startPoint, endPoint));
+        float distance = Vector3.Distance(startPoint, endPoint);
+        trail.time = (distance / maxRaycastDistance) * 0.1f;
+        float time = 0f;
+        trail.transform.position = startPoint;
+        while(time < 1f)
+        {
+            trail.transform.position = Vector3.Lerp(startPoint, endPoint, time);
+            time += Time.deltaTime / trail.time;
+            yield return null;
+        }
+        trail.transform.position = endPoint;
+        Destroy(trail.gameObject, 0f);
     }
 
     private void Grapple()

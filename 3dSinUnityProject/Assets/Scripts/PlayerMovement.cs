@@ -81,12 +81,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (MoveMode == MoveModeEnum.Grapple)
         {
-            Debug.Log(moveDirection.magnitude);
             body.AddForce(moveDirection * grappleSpeed, ForceMode.Acceleration);
         }
         else if (MoveMode == MoveModeEnum.Air)
         {
-            Debug.Log(moveDirection.magnitude);
             body.AddForce(moveDirection * airSpeed, ForceMode.Acceleration);
         }
     }

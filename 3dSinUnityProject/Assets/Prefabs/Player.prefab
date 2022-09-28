@@ -82,9 +82,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 6649058729202237882}
+  maxRaycastDistance: 100
+  hitScanTargetLayers:
+    serializedVersion: 2
+    m_Bits: 247
   mouseLook: {fileID: 7462870548913938720}
   grappleRenderer: {fileID: 3837365539160015369}
   playerMovement: {fileID: 6864644183242320893}
+  bulletTrail: {fileID: 1361785169591463045, guid: de2138ddfe3e62b44a5e89836490313d, type: 3}
   grappleLayers:
     serializedVersion: 2
     m_Bits: 128
