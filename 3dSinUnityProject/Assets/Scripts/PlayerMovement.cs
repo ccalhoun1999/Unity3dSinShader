@@ -83,15 +83,12 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit hitInfo;
 
-        Physics.Raycast(gameObject.transform.position, Vector3.down, out hitInfo, 3f);
+        Physics.Raycast(gameObject.transform.position, Vector3.down, out hitInfo, 1.05f);
         if (hitInfo.collider != null)
         {
             // Debug.Log("Distance from ground: " + hitInfo.distance);
-            if (hitInfo.distance < 1.05f)
-            {
-                body.AddForce(JUMP_VEC * jumpStrength, ForceMode.Impulse);
-                return true;
-            }
+            body.AddForce(JUMP_VEC * jumpStrength, ForceMode.Impulse);
+            return true;
         }
         return false;
     }

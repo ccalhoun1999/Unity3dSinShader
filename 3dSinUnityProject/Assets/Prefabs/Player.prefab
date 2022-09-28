@@ -83,7 +83,7 @@ MonoBehaviour:
   mouseLook: {fileID: 7462870548913938720}
   grappleLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 128
   _hp: 100
 --- !u!114 &6864644183242320893
 MonoBehaviour:
