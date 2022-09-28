@@ -7,7 +7,13 @@ public class NavMeshAgentTest : MonoBehaviour
 {
     [SerializeField]
     private NavMeshAgent navMeshAgent = null;
+    [SerializeField]
+    private TrailRenderer bulletTrail = null;
+    [SerializeField]
+    private LayerMask hitScanLayerMask;
 
+    [SerializeField]
+    private float maxHitScanDistance;
     [SerializeField]
     private float idleBorder;
     [SerializeField]
@@ -117,18 +123,46 @@ public class NavMeshAgentTest : MonoBehaviour
             yield return attackDelay;
             
             RaycastHit hitInfo = new RaycastHit();
-            Vector3 target = (player.transform.position - transform.position) * 20;
+            Vector3 target = player.transform.position - transform.position;
+            target = target.normalized;
 
             yield return aimDelay;
-            Debug.DrawRay(transform.position, target, Color.red, 0.1f);
-            Physics.Raycast(transform.position, target, out hitInfo);
+            
+            Debug.DrawRay(transform.position, target * maxHitScanDistance, Color.red, 0.2f);
+            
+            Physics.Raycast(transform.position, target, out hitInfo, maxHitScanDistance, hitScanLayerMask);
+
+            TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
+
             if (hitInfo.collider != null)
             {
+                StartCoroutine(bulletTrailRoutine(trail, hitInfo.point, transform.position));
                 if (hitInfo.collider.CompareTag("Player"))
                 {
                     hitInfo.collider.GetComponent<FPSPlayer>().TakeDamage(10);
                 }
             }
+            else
+            {
+                Debug.Log("miss");
+                Vector3 raycastEnd = target.normalized * maxHitScanDistance + transform.position;
+                StartCoroutine(bulletTrailRoutine(trail, raycastEnd, transform.position));
+            }
         }
+    }
+    private IEnumerator bulletTrailRoutine(TrailRenderer trail, Vector3 endPoint, Vector3 startPoint)
+    {
+        float distance = Vector3.Distance(startPoint, endPoint);
+        trail.time = (distance / maxHitScanDistance) * 0.1f;
+        float time = 0f;
+        trail.transform.position = startPoint;
+        while(time < 1f)
+        {
+            trail.transform.position = Vector3.Lerp(startPoint, endPoint, time);
+            time += Time.deltaTime / trail.time;
+            yield return null;
+        }
+        trail.transform.position = endPoint;
+        Destroy(trail.gameObject, 0f);
     }
 }

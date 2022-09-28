@@ -82,10 +82,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 6649058729202237882}
-  maxRaycastDistance: 100
+  maxHitScanDistance: 100
+  maxGrappleDistance: 100
   hitScanTargetLayers:
     serializedVersion: 2
-    m_Bits: 247
+    m_Bits: 503
   mouseLook: {fileID: 7462870548913938720}
   grappleRenderer: {fileID: 3837365539160015369}
   playerMovement: {fileID: 6864644183242320893}
@@ -109,8 +110,8 @@ MonoBehaviour:
   body: {fileID: 6649058729202237882}
   cam: {fileID: 2230065688671665683}
   groundSpeed: 8
-  grappleSpeed: 8
-  airSpeed: 8
+  grappleSpeed: 16
+  airSpeed: 12
   jumpStrength: 10
   InputMode: 0
   MoveMode: 3

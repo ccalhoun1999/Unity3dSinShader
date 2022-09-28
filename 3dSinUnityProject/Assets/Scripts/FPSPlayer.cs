@@ -93,7 +93,6 @@ public class FPSPlayer : MonoBehaviour
 
     private IEnumerator bulletTrailRoutine(TrailRenderer trail, Vector3 endPoint, Vector3 startPoint)
     {
-        Debug.Log(Vector3.Distance(startPoint, endPoint));
         float distance = Vector3.Distance(startPoint, endPoint);
         trail.time = (distance / maxHitScanDistance) * 0.1f;
         float time = 0f;
