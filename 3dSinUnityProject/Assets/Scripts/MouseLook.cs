@@ -10,7 +10,7 @@ public class MouseLook : MonoBehaviour
     [Range(0f, 1f)]
     private float mouseSensitivity = 0.1f;
     [SerializeField]
-    [Range(0f, 90f)]
+    [Range(0f, 89f)]
     private float clampAngle = 85.0f;
 
     private float rotY = 0.0f;
