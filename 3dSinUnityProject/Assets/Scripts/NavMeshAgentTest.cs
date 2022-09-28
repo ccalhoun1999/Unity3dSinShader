@@ -116,6 +116,7 @@ public class NavMeshAgentTest : MonoBehaviour
 
     private IEnumerator ShootPlayer()
     {
+        navMeshAgent.destination = transform.position;
         WaitForSeconds attackDelay = new WaitForSeconds(Random.Range(0.05f, 0.4f));
         WaitForSeconds aimDelay = new WaitForSeconds(Random.Range(0.1f, 0.25f));
         while (true)
