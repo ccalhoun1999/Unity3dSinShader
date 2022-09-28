@@ -52,17 +52,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        Vector3 forward = cam.transform.forward;
+        forward.y = 0f;
+        Vector3 right = cam.transform.right;
+        right.y = 0f;
         if (InputMode == InputModeEnum.Keyboard)
         {
-            Vector3 forward = cam.transform.forward;
-            forward.y = 0f;
-            Vector3 right = cam.transform.right;
-            right.y = 0f;
             moveDirection = 
                 forward.normalized * Input.GetAxisRaw("Vertical")
                 + right.normalized * Input.GetAxisRaw("Horizontal");
             moveDirection = moveDirection.normalized;
-            // moveDirection = cam.transform.forward * moveDirection;
+        }
+        else if (InputMode == InputModeEnum.Controller)
+        {
+            moveDirection = 
+                forward.normalized * Input.GetAxis("Vertical")
+                + right.normalized * Input.GetAxis("Horizontal");
+            moveDirection = moveDirection.normalized;
         }
         MovementModeUpdate();
     }
