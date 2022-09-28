@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UniRx;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    private Rigidbody body;
+    private Rigidbody body = null;
     [SerializeField]
-    private Camera cam;
+    private Camera cam = null;
     [SerializeField]
-    private float speed;
+    private float groundSpeed = 0f;
     [SerializeField]
-    private float jumpStrength;
+    private float grappleSpeed = 0f;
+    [SerializeField]
+    private float airSpeed = 0f;
+    [SerializeField]
+    private float jumpStrength = 0f;
 
     // public float gravity = -9.81f;
 
@@ -20,71 +24,89 @@ public class PlayerMovement : MonoBehaviour
 
     private readonly Vector3 JUMP_VEC = new Vector3(0f, 1f, 0f);
 
-    private enum MovementMode
+    public enum InputModeEnum
+    {
+        Keyboard,
+        Controller,
+    }
+    public InputModeEnum InputMode = InputModeEnum.Keyboard;
+
+    public enum MoveModeEnum
     {
         Ground,
         Grapple,
+        Air,
+        Reset,
     }
+    public MoveModeEnum MoveMode = MoveModeEnum.Ground;
 
-    //MovementMode movementMode = MovementMode.Ground;
+    private Vector3 moveDirection = Vector3.zero;
 
     private void Start()
     {
-        Observable.EveryUpdate()
-            .Where(_ => Input.GetKey(KeyCode.W))
-            .Subscribe(_ => {
-                Vector3 direction = new Vector3(cam.transform.forward.x, 0f, cam.transform.forward.z);
-                direction = direction.normalized;
-                // body.velocity += direction * speed;
-                body.AddForce(direction * speed, ForceMode.Acceleration);
-                // body.velocity = GetNewVelVec(body.velocity, body.velocity.magnitude);
-            }).AddTo(this);
-
-        Observable.EveryUpdate()
-            .Where(_ => Input.GetKey(KeyCode.S))
-            .Subscribe(_ => {
-                Vector3 direction = new Vector3(cam.transform.forward.x, 0f, cam.transform.forward.z);
-                direction = direction.normalized;
-                // body.velocity -= direction * speed;
-                body.AddForce(-direction * speed, ForceMode.Acceleration);
-                // body.velocity = GetNewVelVec(body.velocity, body.velocity.magnitude);
-
-            }).AddTo(this);
-
-        Observable.EveryUpdate()
-            .Where(_ => Input.GetKey(KeyCode.A))
-            .Subscribe(_ => {
-                Vector3 direction = new Vector3(cam.transform.right.x, 0f, cam.transform.right.z);
-                direction = direction.normalized;
-                // body.velocity -= direction * speed;
-                body.AddForce(-direction * speed, ForceMode.Acceleration);
-                // body.velocity = GetNewVelVec(body.velocity, body.velocity.magnitude);
-
-            }).AddTo(this);
-
-        Observable.EveryUpdate()
-            .Where(_ => Input.GetKey(KeyCode.D))
-            .Subscribe(_ => {
-                Vector3 direction = new Vector3(cam.transform.right.x, 0f, cam.transform.right.z);
-                direction = direction.normalized;
-                // body.velocity += direction * speed;
-                body.AddForce(direction * speed, ForceMode.Acceleration);
-                // body.velocity = GetNewVelVec(body.velocity, body.velocity.magnitude);
-
-            }).AddTo(this);
-
         Observable.EveryUpdate()
             .Where(_ => Input.GetKeyDown(KeyCode.Space))
             .Subscribe(_ => Jump())
             .AddTo(this);
     }
 
-    private bool Jump()
+    private void Update()
+    {
+        if (InputMode == InputModeEnum.Keyboard)
+        {
+            Vector3 forward = cam.transform.forward;
+            forward.y = 0f;
+            Vector3 right = cam.transform.right;
+            right.y = 0f;
+            moveDirection = 
+                forward.normalized * Input.GetAxisRaw("Vertical")
+                + right.normalized * Input.GetAxisRaw("Horizontal");
+            moveDirection = moveDirection.normalized;
+            // moveDirection = cam.transform.forward * moveDirection;
+        }
+        MovementModeUpdate();
+    }
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
+        // Debug.Log(body.velocity.magnitude);
+    }
+
+    private void MovePlayer()
+    {
+        if (MoveMode == MoveModeEnum.Ground)
+        {
+            body.velocity = new Vector3(moveDirection.x * groundSpeed, body.velocity.y, moveDirection.z * groundSpeed);
+        }
+        else if (MoveMode == MoveModeEnum.Grapple)
+        {
+            Debug.Log(moveDirection.magnitude);
+            body.AddForce(moveDirection * grappleSpeed, ForceMode.Acceleration);
+        }
+        else if (MoveMode == MoveModeEnum.Air)
+        {
+            Debug.Log(moveDirection.magnitude);
+            body.AddForce(moveDirection * airSpeed, ForceMode.Acceleration);
+        }
+    }
+
+    public void MovementModeUpdate(bool force = false)
     {
         RaycastHit hitInfo;
+        if (Physics.Raycast(gameObject.transform.position, Vector3.down, out hitInfo, 1.05f))
+        {
+            MoveMode = MoveModeEnum.Ground;
+        }
+        else if (MoveMode != MoveModeEnum.Grapple || force == true)
+        {
+            MoveMode = MoveModeEnum.Air;
+        }
+    }
 
-        Physics.Raycast(gameObject.transform.position, Vector3.down, out hitInfo, 1.05f);
-        if (hitInfo.collider != null)
+    private bool Jump()
+    {
+        if (MoveMode == MoveModeEnum.Ground)
         {
             // Debug.Log("Distance from ground: " + hitInfo.distance);
             body.AddForce(JUMP_VEC * jumpStrength, ForceMode.Impulse);
@@ -99,9 +121,9 @@ public class PlayerMovement : MonoBehaviour
         {
             vec = new Vector3(0, vec.y, 0);
         }
-        else 
+        else
         {
-            vec = new Vector3(vec.x / mag * speed, vec.y, vec.z / mag * speed);
+            vec = new Vector3(vec.x / mag * groundSpeed, vec.y, vec.z / mag * groundSpeed);
         }
         return vec;
     }

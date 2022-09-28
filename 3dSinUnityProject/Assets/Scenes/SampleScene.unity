@@ -348,6 +348,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eddd289e6ab9c324e8335a31c44ffed7, type: 3}
+--- !u!114 &306001556 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3819903616034635859, guid: 3b2e479435a435a4d919b72f6f3a4887, type: 3}
+  m_PrefabInstance: {fileID: 991889133}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 051e38868e35918468fab48611ad8fa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &379514919
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +371,7 @@ GameObject:
   - component: {fileID: 379514922}
   - component: {fileID: 379514921}
   - component: {fileID: 379514920}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,7 +466,7 @@ GameObject:
   - component: {fileID: 384455674}
   - component: {fileID: 384455673}
   - component: {fileID: 384455672}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Quad (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +562,7 @@ GameObject:
   - component: {fileID: 427386097}
   - component: {fileID: 427386096}
   - component: {fileID: 427386095}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +657,7 @@ GameObject:
   - component: {fileID: 427955439}
   - component: {fileID: 427955438}
   - component: {fileID: 427955437}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -829,7 +840,7 @@ GameObject:
   - component: {fileID: 483155974}
   - component: {fileID: 483155973}
   - component: {fileID: 483155972}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1153,7 +1164,7 @@ GameObject:
   - component: {fileID: 793753978}
   - component: {fileID: 793753977}
   - component: {fileID: 793753976}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1248,7 +1259,7 @@ GameObject:
   - component: {fileID: 807816226}
   - component: {fileID: 807816225}
   - component: {fileID: 807816224}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1340,7 +1351,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 809043883}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1440,10 +1451,6 @@ PrefabInstance:
     - target: {fileID: 6864644183242320893, guid: 3b2e479435a435a4d919b72f6f3a4887, type: 3}
       propertyPath: speed
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6864644183242320893, guid: 3b2e479435a435a4d919b72f6f3a4887, type: 3}
-      propertyPath: jumpStrength
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7649491600472867281, guid: 3b2e479435a435a4d919b72f6f3a4887, type: 3}
       propertyPath: m_Enabled
@@ -1545,7 +1552,7 @@ GameObject:
   - component: {fileID: 1154564842}
   - component: {fileID: 1154564841}
   - component: {fileID: 1154564840}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1699,7 +1706,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1234962231}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Layout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1816,7 +1823,7 @@ GameObject:
   - component: {fileID: 1376263619}
   - component: {fileID: 1376263618}
   - component: {fileID: 1376263617}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1899,6 +1906,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1376263615}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1387569416
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2467609928598595894, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 306001556}
+    - target: {fileID: 5645804500061089529, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
+      propertyPath: m_RootOrder
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645804500061089529, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645804500061089529, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645804500061089529, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645804500061089529, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645804500061089529, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645804500061089529, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645804500061089529, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645804500061089529, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645804500061089529, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645804500061089529, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8715509135987245323, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
+      propertyPath: m_Name
+      value: HUD
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 29b6c820d47e3fc4383be5c142fab390, type: 3}
 --- !u!1 &1453122575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1911,7 +1979,7 @@ GameObject:
   - component: {fileID: 1453122578}
   - component: {fileID: 1453122577}
   - component: {fileID: 1453122576}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2003,7 +2071,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1516849288}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2122,7 +2190,7 @@ GameObject:
   - component: {fileID: 1574712386}
   - component: {fileID: 1574712385}
   - component: {fileID: 1574712384}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2532,7 +2600,7 @@ GameObject:
   - component: {fileID: 1884687747}
   - component: {fileID: 1884687746}
   - component: {fileID: 1884687745}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2628,7 +2696,7 @@ GameObject:
   - component: {fileID: 1931412477}
   - component: {fileID: 1931412476}
   - component: {fileID: 1931412475}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2723,7 +2791,7 @@ GameObject:
   - component: {fileID: 2011261532}
   - component: {fileID: 2011261531}
   - component: {fileID: 2011261530}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Quad (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2819,7 +2887,7 @@ GameObject:
   - component: {fileID: 2030103423}
   - component: {fileID: 2030103422}
   - component: {fileID: 2030103421}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Quad (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2915,7 +2983,7 @@ GameObject:
   - component: {fileID: 2084995729}
   - component: {fileID: 2084995728}
   - component: {fileID: 2084995727}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

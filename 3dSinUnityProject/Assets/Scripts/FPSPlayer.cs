@@ -12,6 +12,8 @@ public class FPSPlayer : MonoBehaviour
     [SerializeField]
     private LineRenderer grappleRenderer = null;
     [SerializeField]
+    private PlayerMovement playerMovement = null;
+    [SerializeField]
     private LayerMask grappleLayers;
     [SerializeField]
     private float _hp;
@@ -105,11 +107,13 @@ public class FPSPlayer : MonoBehaviour
         Coroutine grappleDrawRoutine = StartCoroutine(GrappleDraw());
         while(Time.time < startTime + duration && grappling == true)
         {
+            playerMovement.MoveMode = PlayerMovement.MoveModeEnum.Grapple;
             Vector3 force = Vector3.Normalize(hitInfo.point - transform.position) * 10f;
             Vector3 scaledForce = new Vector3(force.x * 3f, force.y * 3f, force.z * 3f);
             body.AddForce(scaledForce);
             yield return UpdateRate;
         }
+        playerMovement.MovementModeUpdate(true);
         StopCoroutine(grappleDrawRoutine);
         grappleRenderer.enabled = false;
     }
@@ -121,5 +125,10 @@ public class FPSPlayer : MonoBehaviour
             grappleRenderer.SetPosition(0, transform.position);
             yield return null;
         }
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return body.velocity;
     }
 }
