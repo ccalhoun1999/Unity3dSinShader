@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 76750793}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hooks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 169155807}
   - component: {fileID: 169155806}
   - component: {fileID: 169155805}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 474125807}
   - component: {fileID: 474125806}
   - component: {fileID: 474125805}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,12 +373,12 @@ GameObject:
   - component: {fileID: 651173971}
   - component: {fileID: 651173970}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: Skybox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &651173970
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 732484928}
   - component: {fileID: 732484927}
   - component: {fileID: 732484926}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 766232220}
   - component: {fileID: 766232219}
   - component: {fileID: 766232218}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -644,7 +644,7 @@ GameObject:
   - component: {fileID: 768816720}
   - component: {fileID: 768816719}
   - component: {fileID: 768816718}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,8 +739,8 @@ GameObject:
   - component: {fileID: 841344566}
   - component: {fileID: 841344565}
   - component: {fileID: 841344564}
-  m_Layer: 2
-  m_Name: Cube (1)
+  m_Layer: 6
+  m_Name: Finish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -834,8 +834,8 @@ GameObject:
   - component: {fileID: 877467166}
   - component: {fileID: 877467165}
   - component: {fileID: 877467164}
-  m_Layer: 2
-  m_Name: Cube
+  m_Layer: 6
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -945,7 +945,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -1022,7 +1022,7 @@ GameObject:
   - component: {fileID: 948222769}
   - component: {fileID: 948222768}
   - component: {fileID: 948222767}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1178,7 +1178,7 @@ GameObject:
   - component: {fileID: 1001131790}
   - component: {fileID: 1001131789}
   - component: {fileID: 1001131788}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1439,7 +1439,7 @@ GameObject:
   - component: {fileID: 1337838289}
   - component: {fileID: 1337838288}
   - component: {fileID: 1337838287}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1534,7 +1534,7 @@ GameObject:
   - component: {fileID: 1463365160}
   - component: {fileID: 1463365159}
   - component: {fileID: 1463365158}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1629,7 +1629,7 @@ GameObject:
   - component: {fileID: 1580783913}
   - component: {fileID: 1580783912}
   - component: {fileID: 1580783911}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1724,7 +1724,7 @@ GameObject:
   - component: {fileID: 1586530560}
   - component: {fileID: 1586530559}
   - component: {fileID: 1586530558}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1819,7 +1819,7 @@ GameObject:
   - component: {fileID: 1615984399}
   - component: {fileID: 1615984398}
   - component: {fileID: 1615984397}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1914,7 +1914,7 @@ GameObject:
   - component: {fileID: 1710125914}
   - component: {fileID: 1710125913}
   - component: {fileID: 1710125912}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2084,7 +2084,7 @@ GameObject:
   - component: {fileID: 1914708702}
   - component: {fileID: 1914708701}
   - component: {fileID: 1914708700}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2179,7 +2179,7 @@ GameObject:
   - component: {fileID: 1971462086}
   - component: {fileID: 1971462085}
   - component: {fileID: 1971462084}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2274,7 +2274,7 @@ GameObject:
   - component: {fileID: 1981248544}
   - component: {fileID: 1981248543}
   - component: {fileID: 1981248542}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2369,7 +2369,7 @@ GameObject:
   - component: {fileID: 2003890406}
   - component: {fileID: 2003890405}
   - component: {fileID: 2003890404}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2383,7 +2383,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003890403}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6dd57052a11aa1e4bb15f3680ad29a79, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -2465,7 +2465,7 @@ GameObject:
   - component: {fileID: 2042371368}
   - component: {fileID: 2042371367}
   - component: {fileID: 2042371366}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2560,7 +2560,7 @@ GameObject:
   - component: {fileID: 2112672040}
   - component: {fileID: 2112672039}
   - component: {fileID: 2112672038}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 0.75
-  clampAngle: 85
+  clampAngle: 89
 --- !u!20 &2230065688671665683
 Camera:
   m_ObjectHideFlags: 0

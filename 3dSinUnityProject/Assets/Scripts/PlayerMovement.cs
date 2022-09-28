@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float jumpStrength;
 
-    public float gravity = -9.81f;
+    // public float gravity = -9.81f;
 
     private Vector3 moveVec = Vector3.zero;
 
