@@ -8,7 +8,9 @@ public class FPSPlayer : MonoBehaviour
     [SerializeField]
     private Rigidbody body = null;
     [SerializeField]
-    private float maxRaycastDistance = 40f;
+    private float maxHitScanDistance = 100f;
+    [SerializeField]
+    private float maxGrappleDistance = 100f;
     [SerializeField]
     private LayerMask hitScanTargetLayers;
     [SerializeField]
@@ -71,7 +73,7 @@ public class FPSPlayer : MonoBehaviour
         hitScanOrigin.y -= 0.05f;
         hitScanOrigin.x += 0.05f;
         
-        Physics.Raycast(hitScanOrigin, mouseLook.transform.forward, out hitInfo, maxRaycastDistance, hitScanTargetLayers);
+        Physics.Raycast(hitScanOrigin, mouseLook.transform.forward, out hitInfo, maxHitScanDistance, hitScanTargetLayers);
         TrailRenderer trail = Instantiate(bulletTrail, hitScanOrigin, Quaternion.identity);
 
         if(hitInfo.collider != null)
@@ -84,7 +86,7 @@ public class FPSPlayer : MonoBehaviour
         }
         else
         {
-            Vector3 target = mouseLook.transform.forward.normalized * maxRaycastDistance + hitScanOrigin;
+            Vector3 target = mouseLook.transform.forward.normalized * maxHitScanDistance + hitScanOrigin;
             StartCoroutine(bulletTrailRoutine(trail, target, hitScanOrigin));
         }
     }
@@ -93,7 +95,7 @@ public class FPSPlayer : MonoBehaviour
     {
         Debug.Log(Vector3.Distance(startPoint, endPoint));
         float distance = Vector3.Distance(startPoint, endPoint);
-        trail.time = (distance / maxRaycastDistance) * 0.1f;
+        trail.time = (distance / maxHitScanDistance) * 0.1f;
         float time = 0f;
         trail.transform.position = startPoint;
         while(time < 1f)
@@ -114,7 +116,7 @@ public class FPSPlayer : MonoBehaviour
         hitScanOrigin.y -= 0.05f;
         hitScanOrigin.x += 0.05f;
         
-        Physics.Raycast(hitScanOrigin, mouseLook.transform.forward * 20, out hitInfo, 40f, grappleLayers);
+        Physics.Raycast(hitScanOrigin, mouseLook.transform.forward, out hitInfo, maxGrappleDistance, grappleLayers);
 
         if(hitInfo.collider != null)
         {
