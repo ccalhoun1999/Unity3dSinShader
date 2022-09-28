@@ -61,7 +61,7 @@ public class NavMeshAgentTest : MonoBehaviour
 
     private void BehaviourTree()
     {
-        float distanceFromPlayer = 
+        float distanceFromPlayer =
             Vector3.Distance(transform.position, player.transform.position);
 
         if (distanceFromPlayer > idleBorder)
@@ -110,7 +110,7 @@ public class NavMeshAgentTest : MonoBehaviour
         while (true)
         {
             yield return waiter;
-                navMeshAgent.destination = player.transform.position;
+            navMeshAgent.destination = player.transform.position;
         }
     }
 
@@ -122,15 +122,15 @@ public class NavMeshAgentTest : MonoBehaviour
         while (true)
         {
             yield return attackDelay;
-            
+
             RaycastHit hitInfo = new RaycastHit();
             Vector3 target = player.transform.position - transform.position;
             target = target.normalized;
 
             yield return aimDelay;
-            
+
             Debug.DrawRay(transform.position, target * maxHitScanDistance, Color.red, 0.2f);
-            
+
             Physics.Raycast(transform.position, target, out hitInfo, maxHitScanDistance, hitScanLayerMask);
 
             TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
@@ -145,7 +145,6 @@ public class NavMeshAgentTest : MonoBehaviour
             }
             else
             {
-                Debug.Log("miss");
                 Vector3 raycastEnd = target.normalized * maxHitScanDistance + transform.position;
                 StartCoroutine(bulletTrailRoutine(trail, raycastEnd, transform.position));
             }
@@ -157,7 +156,7 @@ public class NavMeshAgentTest : MonoBehaviour
         trail.time = (distance / maxHitScanDistance) * 0.1f;
         float time = 0f;
         trail.transform.position = startPoint;
-        while(time < 1f)
+        while (time < 1f)
         {
             trail.transform.position = Vector3.Lerp(startPoint, endPoint, time);
             time += Time.deltaTime / trail.time;
