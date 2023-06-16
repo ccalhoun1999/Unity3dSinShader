@@ -1,0 +1,48 @@
+name: Windows Build Action 😎
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build my project ✨
+    runs-on: [self-hosted, windows, unity, 2020.3.21f1]
+    steps:
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: false
+
+      # Cache
+      - uses: actions/cache@v2
+        with:
+          path: 3dSinUnityProject/Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # Build
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: 3dSinUnityProject
+          targetPlatform: StandaloneWindows
+      
+      - name: Return license
+        uses: game-ci/unity-return-license@v2
+        if: always()
+
+      # Output
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Build
+          path: build
