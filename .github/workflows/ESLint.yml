@@ -13,4 +13,4 @@ jobs:
     - name: Install modules
       run: yarn
     - name: Run ESLint
-      run: eslint ./Unity3dSinShader/3dSinUnityProject/Assets/* --ext .cs
+      run: eslint ./3dSinUnityProject/Assets/* --ext .cs
