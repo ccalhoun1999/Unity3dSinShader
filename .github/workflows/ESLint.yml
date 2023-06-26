@@ -1,0 +1,16 @@
+name: CI
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: [self-hosted]
+    steps:
+    - uses: actions/checkout@v3.5.3
+    - name: Install modules
+      run: yarn
+    - name: Run ESLint
+      run: eslint ./Unity3dSinShader/3dSinUnityProject/Assets/* --ext .cs
