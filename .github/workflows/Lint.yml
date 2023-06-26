@@ -10,7 +10,3 @@ jobs:
     runs-on: [self-hosted]
     steps:
     - uses: actions/checkout@v3.5.3
-    - name: Install modules
-      run: yarn
-    - name: Run ESLint
-      run: eslint ./3dSinUnityProject/Assets/* --ext .cs
